@@ -3,10 +3,12 @@ import { buildingController } from "../controller/index.js";
 
 const router = new Router();
 
-router.post("/register", buildingController.create);
+router
+  .post("/register", buildingController.register)
+  .post("/login", buildingController.login);
 
 export const buildingRouter = new Router().use(
-  "/building",
+  "/buildings",
   router.routes(),
   router.allowedMethods()
 );

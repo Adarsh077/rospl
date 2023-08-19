@@ -1,6 +1,6 @@
 import { Application } from "https://deno.land/x/oak@v12.6.0/mod.ts";
 
-import { buildingRouter } from "./router/index.js";
+import { appRouter } from "./router/index.js";
 import { cassandraClient } from "./service/cassandra.service.js";
 
 cassandraClient
@@ -14,7 +14,7 @@ cassandraClient
 
 const app = new Application();
 
-app.use(buildingRouter.routes());
+app.use(appRouter.routes());
 
 app.addEventListener("listen", () => {
   console.log("App is running on http://localhost:8000");

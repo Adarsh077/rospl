@@ -3,6 +3,7 @@ import cassandra from "npm:cassandra-driver";
 class CassandraClient {
   constructor() {
     this.client = null;
+    this.cassandra = cassandra;
   }
 
   async connect(options) {
