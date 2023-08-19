@@ -1,0 +1,8 @@
+docker exec -it container-name cqlsh
+
+CREATE KEYSPACE rospl WITH replication = {'class': 'NetworkTopologyStrategy', 'replication_factor' : 1};
+
+USE rospl;
+
+create table buildings (id text, name text, password text, primary key ((id)));
+create table cars (id uuid, carNumber text, buildingId uuid, primary key ((id)));
