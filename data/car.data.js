@@ -15,3 +15,25 @@ export const upsert = async ({ carNumber, buildingId }) => {
 
   return { car: response.rows[0] };
 };
+
+export const findAll = async ({ buildingId }) => {
+  const response = await cassandraClient.execute(
+    "SELECT * FROM cars WHERE buildingId = ? ALLOW FILTERING",
+    [buildingId]
+  );
+
+  return { cars: response.rows };
+};
+
+export const findOne = async ({ carId }) => {
+  const response = await cassandraClient.execute(
+    "SELECT * FROM cars WHERE id = ?",
+    [carId]
+  );
+
+  return { car: response.rows[0] };
+};
+
+export const deleteCar = async ({ carId }) => {
+  await cassandraClient.execute("DELETE FROM cars WHERE id = ?", [carId]);
+};

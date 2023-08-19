@@ -3,7 +3,10 @@ import { carController } from "../controller/index.js";
 
 const router = new Router();
 
-router.post("/", carController.upsert);
+router
+  .post("/", carController.addCar)
+  .get("/", carController.findAllCarsByBuildingId)
+  .delete("/:carId", carController.deleteCar);
 
 export const carRouter = new Router().use(
   "/buildings/:buildingId/cars",
