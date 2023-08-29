@@ -31,3 +31,9 @@ export const login = async ({ buildingId, password }) => {
 
   return { building };
 };
+
+export const findAll = async () => {
+  const { buildings } = await buildingDataLayer.findAll();
+
+  return { buildings };
+};

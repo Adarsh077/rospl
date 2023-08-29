@@ -17,3 +17,9 @@ export const findById = async ({ buildingId }) => {
 
   return { building: response.rows[0] };
 };
+
+export const findAll = async () => {
+  const response = await cassandraClient.execute("SELECT * FROM buildings");
+
+  return { buildings: response.rows };
+};

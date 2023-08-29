@@ -9,7 +9,6 @@ export const addCar = async ({ buildingId, carNumber }) => {
   const { cars } = await carDataLayer.findAll({
     buildingId,
   });
-  console.log(cars);
 
   const doesExists = cars.find((car) => car.carnumber === carNumber);
   if (doesExists) {

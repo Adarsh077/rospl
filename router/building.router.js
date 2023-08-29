@@ -5,7 +5,8 @@ const router = new Router();
 
 router
   .post("/register", buildingController.register)
-  .post("/login", buildingController.login);
+  .post("/login", buildingController.login)
+  .get("/", buildingController.findAll);
 
 export const buildingRouter = new Router().use(
   "/buildings",

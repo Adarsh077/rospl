@@ -22,3 +22,9 @@ export const login = async (ctx) => {
 
   ctx.response.body = response;
 };
+
+export const findAll = async (ctx) => {
+  const response = await buildingService.findAll();
+
+  ctx.response.body = response;
+};
