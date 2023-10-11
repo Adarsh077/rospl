@@ -7,6 +7,7 @@ export const addCar = async (ctx) => {
   const response = await carService.addCar({
     buildingId: buildingId,
     carNumber: body.carNumber,
+    isCar: typeof body.isCar === "boolean" ? body.isCar : true,
   });
 
   ctx.response.body = response;

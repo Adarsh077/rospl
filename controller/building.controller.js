@@ -4,7 +4,6 @@ export const register = async (ctx) => {
   const body = await ctx.request.body().value;
 
   const response = await buildingService.register({
-    buildingId: body.buildingId,
     name: body.name,
     password: body.password,
   });
@@ -24,7 +23,17 @@ export const login = async (ctx) => {
 };
 
 export const findAll = async (ctx) => {
-  const response = await buildingService.findAll();
+  const carNumber = ctx.request.url.searchParams.get("carNumber");
 
-  ctx.response.body = response;
+  if (carNumber) {
+    const response = await buildingService.findBuildingsByCarId({
+      carNumber: carNumber,
+    });
+
+    ctx.response.body = response;
+  } else {
+    const response = await buildingService.findAll();
+
+    ctx.response.body = response;
+  }
 };

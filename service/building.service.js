@@ -1,19 +1,12 @@
-import { buildingDataLayer } from "../data/index.js";
+import { buildingDataLayer, carDataLayer } from "../data/index.js";
 
-export const register = async ({ buildingId, name, password }) => {
-  const { building } = await buildingDataLayer.findById({ buildingId });
-
-  if (building) {
-    return { error: "Building Already exists" };
-  }
-
-  const { buildingId: createdBuildingId } = await buildingDataLayer.upsert({
-    buildingId,
+export const register = async ({ name, password }) => {
+  const { buildingId } = await buildingDataLayer.upsert({
     name,
     password,
   });
 
-  return { buildingId: createdBuildingId };
+  return { buildingId };
 };
 
 export const login = async ({ buildingId, password }) => {
@@ -36,4 +29,20 @@ export const findAll = async () => {
   const { buildings } = await buildingDataLayer.findAll();
 
   return { buildings };
+};
+
+export const findBuildingsByCarId = async ({ carNumber }) => {
+  const { car } = await carDataLayer.findOne({
+    carNumber,
+  });
+
+  if (!car || !car.buildingid) return { message: "No building found!" };
+
+  const { building } = await buildingDataLayer.findById({
+    buildingId: car.buildingid,
+  });
+
+  if (!building) return { message: "No building found!" };
+
+  return { building };
 };

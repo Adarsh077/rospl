@@ -1,6 +1,6 @@
 import { carDataLayer, buildingDataLayer } from "../data/index.js";
 
-export const addCar = async ({ buildingId, carNumber }) => {
+export const addCar = async ({ buildingId, carNumber, isCar }) => {
   const { building } = await buildingDataLayer.findById({ buildingId });
   if (!building) {
     return { error: "Building not found!" };
@@ -18,6 +18,7 @@ export const addCar = async ({ buildingId, carNumber }) => {
   const { car } = await carDataLayer.upsert({
     buildingId,
     carNumber,
+    isCar,
   });
 
   return { car };

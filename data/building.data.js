@@ -1,12 +1,14 @@
 import { cassandraClient } from "../service/index.js";
 
-export const upsert = async ({ buildingId, name, password }) => {
+export const upsert = async ({ name, password }) => {
+  const id = cassandraClient.cassandra.types.Uuid.random();
+
   await cassandraClient.execute(
     "INSERT INTO buildings (id, name, password) VALUES (?, ?, ?)",
-    [buildingId, name, password]
+    [id, name, password]
   );
 
-  return { buildingId };
+  return { buildingId: id };
 };
 
 export const findById = async ({ buildingId }) => {
@@ -19,7 +21,9 @@ export const findById = async ({ buildingId }) => {
 };
 
 export const findAll = async () => {
-  const response = await cassandraClient.execute("SELECT * FROM buildings");
+  const response = await cassandraClient.execute(
+    "SELECT id, name FROM buildings"
+  );
 
   return { buildings: response.rows };
 };
