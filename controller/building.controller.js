@@ -15,7 +15,7 @@ export const login = async (ctx) => {
   const body = await ctx.request.body().value;
 
   const response = await buildingService.login({
-    buildingId: body.buildingId,
+    buildingName: body.buildingName,
     password: body.password,
   });
 

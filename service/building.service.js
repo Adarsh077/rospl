@@ -9,9 +9,9 @@ export const register = async ({ name, password }) => {
   return { buildingId };
 };
 
-export const login = async ({ buildingId, password }) => {
-  const { building } = await buildingDataLayer.findById({
-    buildingId,
+export const login = async ({ buildingName, password }) => {
+  const { building } = await buildingDataLayer.findOne({
+    buildingName,
   });
 
   if (!building) {

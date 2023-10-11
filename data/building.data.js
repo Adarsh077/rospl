@@ -20,6 +20,15 @@ export const findById = async ({ buildingId }) => {
   return { building: response.rows[0] };
 };
 
+export const findOne = async ({ buildingName }) => {
+  const response = await cassandraClient.execute(
+    "SELECT * FROM buildings WHERE name = ? ALLOW FILTERING",
+    [buildingName]
+  );
+
+  return { building: response.rows[0] };
+};
+
 export const findAll = async () => {
   const response = await cassandraClient.execute(
     "SELECT id, name FROM buildings"
