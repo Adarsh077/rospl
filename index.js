@@ -20,4 +20,4 @@ app.addEventListener("listen", () => {
   console.log("App is running on http://localhost:8000");
 });
 
-await app.listen({hostname: '0.0.0.0', port: 8000 });
+await app.listen({hostname: '13.233.186.190', port: 8000 });
